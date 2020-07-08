@@ -1,20 +1,19 @@
-class Ship
-  attr_reader :name, :size, :health
+require 'pry'
 
-  def initialize(name, size)
+class Ship
+  attr_reader :name, :length
+  attr_accessor :health
+
+
+  def initialize(name, length)
     @name = name
-    @size = size
-    @health = @size
+    @length = length
+    @health = length
 
   end
 
-  # def health
-  #   @health = @size
-  # end
-
-  def has_sunk?
+  def sunk?
     @health < 1
-
   end
 
   def hit
