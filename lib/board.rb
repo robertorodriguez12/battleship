@@ -1,31 +1,22 @@
+require 'pry'
+
+# ask instructors what "very little code outside of class" means for testing
+# very detailed testing - longer - especially for testing the hash
 class Board
   attr_reader :cells
 
-# interaction pattern tells us we don't need an arg here
+  LETTERS = ['A', 'B', 'C', 'D']
+  NUMBERS = ['1', '2', '3', '4']
+
   def initialize
-    @cells = cells
+    @cells = {}
   end
 
-  # not actually returning object id in hash here
-  board.cells = {
-   "A1" => #<Cell:0x00007ff0728a3f58...>,
-   "A2" => #<Cell:0x00007ff0728a3ee0...>,
-   "A3" => #<Cell:0x00007ff0728a3e68...>,
-   "A4" => #<Cell:0x00007ff0728a3df0...>,
-   "B1" => #<Cell:0x00007ff0728a3d78...>,
-   "B2" => #<Cell:0x00007ff0728a3d00...>,
-   "B3" => #<Cell:0x00007ff0728a3c88...>,
-   "B4" => #<Cell:0x00007ff0728a3c10...>,
-   "C1" => #<Cell:0x00007ff0728a3b98...>,
-   "C2" => #<Cell:0x00007ff0728a3b20...>,
-   "C3" => #<Cell:0x00007ff0728a3aa8...>,
-   "C4" => #<Cell:0x00007ff0728a3a30...>,
-   "D1" => #<Cell:0x00007ff0728a39b8...>,
-   "D2" => #<Cell:0x00007ff0728a3940...>,
-   "D3" => #<Cell:0x00007ff0728a38c8...>,
-   "D4" => #<Cell:0x00007ff0728a3850...>
-  }
-
-  binding.pry
-
+  def generate_cells
+    LETTERS.each do |letter|
+      NUMBERS.each do |number|
+        @cells[letter+number] = Cell.new(letter + number)
+      end
+    end
+  end
 end
