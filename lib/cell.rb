@@ -13,7 +13,6 @@ class Cell
   def empty?
     return false if @ship
     return true
-
   end
 
   def place_ship(ship)

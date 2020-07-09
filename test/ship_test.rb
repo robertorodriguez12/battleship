@@ -47,7 +47,7 @@ class ShipTest < MiniTest::Test
 
     cruiser.hit
     assert_equal 2, cruiser.health
-
+binding.pry
     # ship1.hit
 
 
