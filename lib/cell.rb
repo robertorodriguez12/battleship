@@ -30,11 +30,15 @@ class Cell
   end
 
   def render(default = false)
+    # we are not using methods on objects because we are just returning letter to terminal
+    # we are in the cell class so we don't need to reference anything in another class to use these methods
     return "M" if fired_upon? && empty?
     return "." if default == false && fired_upon? == false
     return "S" if fired_upon? == false && default == true
     return "H" if fired_upon? && @ship.sunk? == false
     return "X" if @ship.sunk?
+    # ship works with or without @
+    # it is the only time here we are calling variable
   end
 
 end
