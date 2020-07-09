@@ -23,8 +23,11 @@ class Board
 
   def valid_coordinate?(key)
     @cells.has_key?(key)
+    binding.pry
   end
 
-  # def valid_placement(@ship, @coordinate)
+  def valid_placement?(ship, coordinate)
+    coordinate.length == ship.length
+  end
 
 end
