@@ -2,18 +2,19 @@ require 'pry'
 require './lib/cell'
 
 class Board
-  attr_reader :cells, :letters, :numbers, :cell
+  attr_reader :cells
+
+  LETTERS = ['A', 'B', 'C', 'D']
+  NUMBERS = ['1', '2', '3', '4']
 
   def initialize
-    @cell = cell
     @cells = {}
-    @letters = ['A', 'B', 'C', 'D']
-    @numbers = ['1', '2', '3', '4']
+    generate_cells
   end
 
   def generate_cells
-    @letters.each do |letter|
-      @numbers.each do |number|
+    LETTERS.each do |letter|
+    NUMBERS.each do |number|
         @cells[letter+number] = Cell.new(letter + number)
       end
     end
