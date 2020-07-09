@@ -1,5 +1,6 @@
 require 'pry'
 require './lib/cell'
+require './lib/ship'
 
 class Board
   attr_reader :cells
@@ -18,6 +19,14 @@ class Board
         @cells[letter+number] = Cell.new(letter + number)
       end
     end
+  end
+
+  def valid_coordinate?(coordinate)
+    @cells.has_key?(coordinate)
+  end
+
+  def valid_placement?(ship, coordinate)
+    coordinate == ship.length
   end
 
 end
