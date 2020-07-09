@@ -14,7 +14,7 @@ class Board
 
   def generate_cells
     LETTERS.each do |letter|
-    NUMBERS.each do |number|
+      NUMBERS.each do |number|
         @cells[letter+number] = Cell.new(letter + number)
       end
     end
