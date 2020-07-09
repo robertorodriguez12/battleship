@@ -10,6 +10,7 @@ class Board
 
   def initialize
     @cells = {}
+    generate_cells
   end
 
   def generate_cells
@@ -19,4 +20,11 @@ class Board
       end
     end
   end
+
+  def valid_coordinate?(key)
+    @cells.has_key?(key)
+  end
+
+  # def valid_placement(@ship, @coordinate)
+
 end
