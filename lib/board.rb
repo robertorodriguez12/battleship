@@ -59,7 +59,37 @@ class Board
     end
   end
 
-  
+  def valid_horizontal_placement?(coordinates)
+    letters = coordinates.map do |coordinate|
+      coordinate.split("")[0].ord
+    end
+    numbers = coordinates.map do |coordinate|
+      coordinate.split("")[1].ord
+    end
+    valid_letters = letters.each_cons(2).all? do |first, second|
+      first == second
+    end
+    valid_numbers = numbers.each_cons(2).all? do |first, second|
+      first + 1 == second
+    end
+    valid_letters && valid_numbers
+  end
+
+  def valid_vertical_placement?(coordinates)
+    letters = coordinates.map do |coordinate|
+      coordinate.split("")[0].ord
+    end
+    numbers = coordinates.map do |coordinate|
+      coordinate.split("")[1].ord
+    end
+    valid_letters = letters.each_cons(2).all? do |first, second|
+      first + 1 == second
+    end
+    valid_numbers = numbers.each_cons(2).all? do |first, second|
+      first == second
+    end
+    valid_letters && valid_numbers
+  end
 
 
 end
