@@ -19,7 +19,7 @@ class BoardTest < Minitest::Test
     assert_equal expected, board.cells.keys
   end
 
-  def test_can_tell_us_if_coordinate_is_valid
+  def test_board_has_valid_coordinates
     board = Board.new
 
     assert_equal true, board.valid_coordinate?("A1")
@@ -29,7 +29,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_coordinate?("A22")
   end
 
-  def test_can_tell_if_placements_are_valid
+  def test_board_can_validate_placements
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)

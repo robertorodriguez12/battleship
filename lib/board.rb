@@ -35,4 +35,31 @@ class Board
     no_overlap?(coordinate_array)
     # "return false if" statement - we don't use end?
   end
+
+  def valid_letters?(coordinates)
+    # iterate using map, store coordinates into letters variable
+    letters = coordinates.map do |coordinate|
+      # block variable isolates each element  -as a string?
+      # split ex. "A4" into "A", "4"
+      # take first character and return .ord code point
+      coordinate.split("").first.ord
+    end
+
+    letters.each_cons(2).all? do |first, second|
+      first + 1 == second
+    end
+  end
+
+  def valid_numbers?(coordinates)
+    numbers = coordinates.map do |coordinate|
+      coordinate.split("")[1].ord
+    end
+    numbers.each_cons(2).all? do |first, second|
+      first + 1 == second
+    end
+  end
+
+  
+
+
 end
