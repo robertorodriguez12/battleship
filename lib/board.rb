@@ -25,8 +25,9 @@ class Board
 
   def valid_placement?(ship, coordinate_array)
     return false if ship.length != coordinate_array.length
-    valid_letters?(coordinate_array) &&
-    valid_numbers?(coordinate_array) &&
+    # binding.pry
+    # valid_letters?(coordinate_array) &&
+    # valid_numbers?(coordinate_array) &&
     (valid_horizontal_placement?(coordinate_array) || valid_vertical_placement?(coordinate_array)) &&
     no_overlap?(coordinate_array)
 
@@ -117,5 +118,26 @@ class Board
       @cells[coordinate].empty?
     end
   end
+
+  def render(render_ship = false)
+    row = ['A', 'B', 'C', 'D']
+    row_index = 0
+    @cells.values.each_slice(4).reduce("  1 2 3 4") do |acc, cells|
+      x = cells.map do |cell|
+        if render_ship
+          "#{cell.render(true)} "
+        else
+          "#{cell.render} "
+        end
+
+      end.join
+      # binding.pry
+      acc = acc + "\n #{row[row_index].to_s} " + x.strip
+      row_index += 1
+      acc
+    end.concat("\n")
+
+  end
+
 
 end
