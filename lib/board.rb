@@ -31,7 +31,7 @@ class Board
     # ship length and coordinate_array length must be equal
     return false if ship.length != coordinate_array.length
     # Ship has to be either horizontally or vertically place, AND must not overlap with another ship
-    (valid_horizontal_placement?(coordinate_array) || valid_vertical_placement(coordinate_array)) &&
+    (valid_horizontal_placement?(coordinate_array) || valid_vertical_placement?(coordinate_array)) &&
     no_overlap?(coordinate_array)
     # "return false if" statement - we don't use end?
   end
@@ -91,5 +91,10 @@ class Board
     valid_letters && valid_numbers
   end
 
+  def no_overlap?(coordinate_array)
+    coordinate_array.all? do |coordinate|
+      @cells[coordinate].empty?
+    end
+  end
 
 end
