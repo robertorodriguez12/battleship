@@ -106,4 +106,23 @@ class Board
       end
   end
 
+  def render(render_ship = false)
+    row = ['A', 'B', 'C', 'D']
+    row_index = 0
+    # add space before 1 below
+    @cells.values.each_slice(4).reduce("  1 2 3 4") do |acc, cells|
+      x = cells.map do |cell|
+        if render_ship
+          "#{cell.render(true)} "
+        else
+          "#{cell.render} "
+        end
+
+      end.join
+      acc = acc + "\n #{row[row_index].to_s} " + x.strip
+      row_index += 1
+      acc
+    end.concat("\n")
+
+  end
 end
