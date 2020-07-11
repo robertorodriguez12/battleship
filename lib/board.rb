@@ -25,26 +25,8 @@ class Board
 
   def valid_placement?(ship, coordinate_array)
     return false if ship.length != coordinate_array.length
-    # binding.pry
-    # valid_letters?(coordinate_array) &&
-    # valid_numbers?(coordinate_array) &&
     (valid_horizontal_placement?(coordinate_array) || valid_vertical_placement?(coordinate_array)) &&
     no_overlap?(coordinate_array)
-
-    # coord_array = []
-    # coordinate_array.each do |coordinate|
-    #   coord_array << coordinate.chars
-    # end
-    # coord_letter = coord_array[0][0]
-    # coord_array.each do |split_coord|
-    #   if split_coord[0] == coord_letter
-    #     return true
-    #   else
-    #     return false
-    #   end
-    # end
-
-    # coordinate_array.length == ship.length
 
   end
 
@@ -55,7 +37,6 @@ class Board
     letters.each_cons(2).all? do |first, second|
       first + 1 == second
     end
-    # binding.pry
 
   end
 
@@ -66,11 +47,11 @@ class Board
     numbers.each_cons(2).all? do |first, second|
       first + 1 == second
     end
-    # binding.pry
 
   end
 
   def valid_horizontal_placement?(coordinates)
+    # binding.pry
     letters = coordinates.map do |coordinate|
     coordinate.split("")[0].ord
     end
@@ -129,12 +110,12 @@ class Board
         else
           "#{cell.render} "
         end
-
       end.join
-      # binding.pry
+
       acc = acc + "\n #{row[row_index].to_s} " + x.strip
       row_index += 1
       acc
+
     end.concat("\n")
 
   end
