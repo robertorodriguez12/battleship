@@ -72,8 +72,40 @@ class BoardTest < Minitest::Test
 
     submarine = Ship.new("Submarine", 2)
 
-    board.valid_placement?(submarine, ["A1", "B1"])
+    # board.valid_placement?(submarine, ["A1", "B1"])
 
     assert_equal false, board.valid_placement?(submarine, ["A1", "B1"])
+  end
+
+  # def test_can_place_ship
+  #   board = Board.new
+  #   cruiser = Ship.new("Cruiser", 3)
+  #   # @cells.keys = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
+  #
+  #   board.place(cruiser, ["A1", "A2", "A3"])
+  #
+  #   submarine = Ship.new("Submarine", 2)
+  #
+  #   board.valid_placement?(submarine, ["A1", "B1"])
+
+  #   "expected = "?
+  #
+  #   assert_equal board.place(cruiser, ["A1", "A2", "A3"])
+  #
+  # end
+
+  def test_can_render_board
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    assert_equal expected1, board.render
+
+    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    assert_equal expected2, board.render(true)
   end
 end
