@@ -10,7 +10,7 @@ class ShipTest < MiniTest::Test
 
     assert_instance_of Ship, ship
 
-  end
+  end 
 
   def test_it_has_attributes
     ship1 = Ship.new("Cruiser", 3)
