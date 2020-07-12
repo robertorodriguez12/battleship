@@ -5,7 +5,7 @@ require './lib/ship'
 
 
 class Game
-  attr_reader :player, :turn
+  attr_reader :player, :turn, :start
 
   def initialize(human_player, computer_player)
     @human_player = human_player
@@ -16,13 +16,23 @@ class Game
   end
 
   def start
-    greeting = puts "Welcome to BATTLESHIP"
-    puts "Enter 'p' to play or 'q' to quit."
-    answer = gets.chomp
+  greeting = "Welcome to BATTLESHIP"
+  puts greeting
+  puts "Enter 'p' to play or 'q' to quit."
+  print "> "
+  answer = gets.chomp
 
-    # if 'p'
+  if answer == 'p'
+    @start = true
+  elsif answer == 'q'
+    puts "Please enter p to play."
+  end
+
+
 
 
   end
+
+
 
 end
