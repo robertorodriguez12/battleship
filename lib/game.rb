@@ -3,19 +3,47 @@ require './lib/board'
 require './lib/cell'
 require './lib/ship'
 
-
 class Game
-  attr_reader :player, :turn, :start
+  attr_reader :user, :turn, :start
+  # don't include :start? Already defining method below
 
-  def initialize(human_player, computer_player)
-    @human_player = human_player
-    @computer_player = computer_player
+
+  human_cruiser = Ship.new("Cruiser", 3)
+  human_submarine = Ship.new("Submarine", 2)
+
+
+  human_board = Board.new
+  computer_board = Board.new
+
+  def initialize(user, computer)
+    @user = user
+    @ai = ai
+    @board = Board.new
     @turn = turn
     @start = false
 
   end
 
+  def place_computer_ships
+    ai_cruiser = Ship.new("Cruiser", 3)
+    ai_submarine = Ship.new("Submarine", 2)
+    potential_submarine_placement = [@board.cells.keys.sample, @board.cells.keys.sample]
+    #use until valid placement
+    until @board.valid_placement?(ai_submarine, potential_submarine_placement)
+      potential_submarine_placement = [@board.cells.keys.sample, @board.cells.keys.sample]
+    end
+    @board.place_ship(ai_submarine, potential_submarine_placement)
+    until @board.valid_placement?(ai_cruiser, potential_cruiser_placement)
+      potential_cruiser_placement = [@board.cells.keys.sample, @board.cells.keys.sample, @board.cells.keys.sample]
+    end
+    @board.place_ship(ai_cruiser, potential_cruiser_placement)
+
+  end
+
+
   def start
+    place_computer_ships
+    binding.pry
   greeting = "Welcome to BATTLESHIP"
   puts greeting
   puts "Enter 'p' to play or 'q' to quit."
@@ -28,7 +56,25 @@ class Game
     puts "Please enter p to play."
   end
 
+  # should computer/user placement be a separate method?
+  if @start == true
+    puts ""
 
+
+    puts "Place your Cruiser by entering coordinates, example 'A1, A2, A3'"
+    print '> '
+    cruiser_placement = gets.chomp
+
+
+    # computer generates random placement of two ships
+      # get hash keys as array, create 2 arrays - one with 2 elements, one with 3
+      # computer_cruiser/computer_submarine = .sample(2-3) method
+      # ^ chooses specified # of elements
+      # use .place to put on board
+    # display message to user & use .render to show board
+      # gets.chomp to place cruiser and submarine
+      # return invalid coordinate message if needed
+        # nested if statement?
 
 
   end
@@ -36,6 +82,10 @@ class Game
 
 
 end
+
+
+
+# Do we need to create cell instances?
 
 # when firing a shot, display result to user
 # after user chooses to play, place both players' ships to set up
