@@ -33,7 +33,4 @@ class Board
     }
   end
 
-# Google - how to create actual objects INSIDE class
-  # OOP -
-  # if we want to define this hash outside our init, we'd have to make a method
 end
