@@ -98,14 +98,20 @@ class BoardTest < Minitest::Test
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
 
-    board.place(cruiser, ["A1", "A2", "A3"])
-
     expected1 = "  1 2 3 4 \n A . . . . \n B . . . . \n C . . . . \n D . . . . \n"
-
     assert_equal expected1, board.render
+
+    board.place(cruiser, ["A1", "A2", "A3"])
 
     expected2 = "  1 2 3 4 \n A S S S . \n B . . . . \n C . . . . \n D . . . . \n"
 
     assert_equal expected2, board.render(true)
   end
+
+  # def test_can_render_hits_misses_and_sunken_ships
+  #   board = Board.new
+  #   cruiser = Ship.new("Cruiser", 3)
+  #
+  #   board.place(cruiser, "A1", "A2", "A3")
+  # end
 end
