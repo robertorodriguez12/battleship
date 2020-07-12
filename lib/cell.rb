@@ -1,5 +1,5 @@
 require './lib/ship'
-require 'pry'
+# require 'pry'
 
 class Cell
   attr_reader :coordinate, :has_ship, :fired_upon, :ship
@@ -13,7 +13,6 @@ class Cell
   def empty?
     return false if @ship
     return true
-
   end
 
   def place_ship(ship)
