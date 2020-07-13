@@ -2,6 +2,7 @@ require 'pry'
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
+require './lib/board''
 
 class Turn
 
@@ -22,6 +23,5 @@ class Turn
 
 
   end
-
 
 end
