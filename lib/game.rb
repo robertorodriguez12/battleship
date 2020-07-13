@@ -4,11 +4,11 @@ require './lib/cell'
 require './lib/ship'
 
 class Game
-  attr_reader :user, :turn, :start, :ai, :place_human_cruiser, :place_human_submarine, :board
+  attr_reader :human, :turn, :start, :ai, :place_human_cruiser, :place_human_submarine, :board
   # don't include :start? Already defining method below
 
   def initialize
-    @user = 'Human Player'
+    @human = 'Human Player'
     @ai = ai
     @board = Board.new
     @turn = turn
