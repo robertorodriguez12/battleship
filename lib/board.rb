@@ -171,7 +171,7 @@ class Board
     end
       end
   end
-
+  
   def render(render_ship = false)
     row = ['A', 'B', 'C', 'D']
     row_index = 0
