@@ -47,11 +47,9 @@ class Board
     numbers.each_cons(2).all? do |first, second|
       first + 1 == second
     end
-
   end
 
   def valid_horizontal_placement?(coordinates)
-    # binding.pry
     letters = coordinates.map do |coordinate|
     coordinate.split("")[0].ord
     end
@@ -93,30 +91,10 @@ class Board
 
   end
 
-  def  no_overlap?(coordinate_array)
+  def no_overlap?(coordinate_array)
     coordinate_array.all? do |coordinate|
       @cells[coordinate].empty?
     end
-  end
-
-  def render(render_ship = false)
-    row = ['A', 'B', 'C', 'D']
-    row_index = 0
-    @cells.values.each_slice(4).reduce("  1 2 3 4") do |acc, cells|
-      x = cells.map do |cell|
-        if render_ship
-          "#{cell.render(true)} "
-        else
-          "#{cell.render} "
-        end
-      end.join
-
-      acc = acc + "\n #{row[row_index].to_s} " + x.strip
-      row_index += 1
-      acc
-
-    end.concat("\n")
-
   end
 
   def valid_coordinate?(key)
@@ -193,7 +171,7 @@ class Board
     end
       end
   end
-
+  
   def render(render_ship = false)
     row = ['A', 'B', 'C', 'D']
     row_index = 0

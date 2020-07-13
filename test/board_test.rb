@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require 'minitest/nyan_cat'
+require 'minitest/pride'
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
@@ -9,7 +9,7 @@ class BoardTest < Minitest::Test
 
   def test_board_exists
     board = Board.new
-  
+
     assert_instance_of Board, board
   end
 
@@ -31,7 +31,7 @@ class BoardTest < Minitest::Test
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-  
+
     assert_equal false, board.valid_placement?(cruiser, ["A1", "A2"])
     assert_equal false, board.valid_placement?(submarine, ["A2", "A3", "A4"])
   end
@@ -40,45 +40,32 @@ class BoardTest < Minitest::Test
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-  
+
     assert_equal false, board.valid_placement?(cruiser, ["A1", "A2", "A4"])
     assert_equal false, board.valid_placement?(submarine, ["A1", "C1"])
     assert_equal false, board.valid_placement?(cruiser, ["A3", "A2", "A1"])
     assert_equal false, board.valid_placement?(submarine, ["C1", "B1"])
-  
   end
 
   def test_coordinates_are_not_diagonal
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-  
+
     assert_equal false, board.valid_placement?(cruiser, ['A1', 'B2', 'C3'])
   end
-  
+
   def test_ships_cannot_overlap
    board = Board.new
    cruiser = Ship.new("Cruiser", 3)
-  
+
    board.place(cruiser, ["A1", "A2", "A3"])
-  
+
    submarine = Ship.new("Submarine", 2)
-  
+
    board.valid_placement?(submarine, ["A1", "B1"])
-  
+
    assert_equal false, board.valid_placement?(submarine, ['A1', 'B1'])
-  
-  
-  end
-
-    expected =  "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-    
-    assert_equal expected, board.render
-
-    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
-
-    assert_equal expected2, board.render(true)
-
   end
 
   def test_coordinates_are_consecutive
