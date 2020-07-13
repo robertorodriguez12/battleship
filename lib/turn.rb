@@ -11,7 +11,17 @@ class Turn
 
   end
 
+  def ai_turn
 
 
+  end
+
+
+
+  def winner
+    return 
+
+
+  end
 
 end

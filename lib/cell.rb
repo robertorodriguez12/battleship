@@ -1,5 +1,5 @@
 require './lib/ship'
-# require 'pry'
+require 'pry'
 
 class Cell
   attr_reader :coordinate, :has_ship, :fired_upon, :ship
@@ -32,6 +32,9 @@ class Cell
 
     return "M" if fired_upon? && empty?
     return "." if default == false && fired_upon? == false
+    return "." if default == true && fired_upon? == false && empty?
+    return "S" if fired_upon? == false && default == true && empty? == false
+    return "H" if (fired_upon? == true && @ship.sunk? == false) && empty? == false
     return "." if (default == true && fired_upon? == false) && empty?
     return "S" if (fired_upon? == false && default == true) && empty? == false
     return "H" if (fired_upon? && @ship.sunk? == false) && empty? == false

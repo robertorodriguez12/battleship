@@ -5,7 +5,7 @@ require './lib/ship'
 require './lib/board'
 
 class Game
-  attr_reader :user, :turn, :start, :ai
+  attr_reader :human, :turn, :start, :ai, :place_human_cruiser, :place_human_submarine, :board
 
   def initialize
     @human = 'Human Player'
@@ -68,7 +68,7 @@ class Game
     if @start
       print @board.render
 
-      puts "AI has laid out their ships on the grid."
+      puts "AI has laid out their ships on the grid"
       puts "You now need to lay out your two ships."
       puts "The Cruiser is three units long and the Submarine is two units long."
 
@@ -82,11 +82,11 @@ class Game
         puts "Those are invalid coordinates. Please try again:"
         puts "Enter the cells for the Cruiser (3 Spaces): For example A1 A2 A3 (no commas)"
         print "> "
-        @user_cruiser_placement = []
+        @human_cruiser_placement = []
         user_input = gets.chomp
       end
       @board.place(@human_cruiser, @human_cruiser_placement)
-
+      
       print @board.render(true)
 
       puts "Enter the squares for the Submarine (2 Spaces)"
@@ -100,14 +100,14 @@ class Game
         puts "Those are invalid coordinates. Please try again:"
         puts "Enter the cells for the Submarine (2 Spaces): For example A1 A2(no commas)"
         print "> "
-        @user_submarine_placement = []
+        @human_submarine_placement = []
         user_input = gets.chomp
+        place_human_submarine(user_input)
       end
       @board.place(@human_submarine, @human_submarine_placement)
-
+      
       print @board.render(true)
     end
-
   end
 
   game = Game.new
@@ -141,7 +141,6 @@ class Game
 
 
 # Do we need to create cell instances?
-
 # when firing a shot, display result to user
 # after user chooses to play, place both players' ships to set up
 # computer = random placement of ships (random element in keys array)

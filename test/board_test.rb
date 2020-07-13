@@ -31,7 +31,6 @@ class BoardTest < Minitest::Test
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-
     assert_equal false, board.valid_placement?(cruiser, ["A1", "A2"])
     assert_equal false, board.valid_placement?(submarine, ["A2", "A3", "A4"])
   end
@@ -77,7 +76,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_placement?(submarine, ["A1", "C1"])
     assert_equal false, board.valid_placement?(cruiser, ["A3", "A2", "A1"])
     assert_equal false, board.valid_placement?(submarine, ["C1", "B1"])
-
+    
     assert_equal true, board.valid_placement?(cruiser, ["A1", "A2", "A3"])
     assert_equal true, board.valid_placement?(cruiser, ["B4", "C4", "D4"])
     assert_equal true, board.valid_placement?(submarine, ["D2", "D3"])
@@ -88,21 +87,22 @@ class BoardTest < Minitest::Test
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
 
-    assert_equal false, board.valid_placement?(cruiser, ["A1", "B2", "C3"])
-    assert_equal false, board.valid_placement?(submarine, ["C2", "D3"])
+    assert_equal false, board.valid_placement?(cruiser, ['A1', 'B2', 'C3'])
   end
 
   def test_ships_cannot_overlap
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
+   board = Board.new
+   cruiser = Ship.new("Cruiser", 3)
 
-    board.place(cruiser, ["A1", "A2", "A3"])
+   board.place(cruiser, ["A1", "A2", "A3"])
 
-    submarine = Ship.new("Submarine", 2)
+   submarine = Ship.new("Submarine", 2)
 
-    # board.valid_placement?(submarine, ["A1", "B1"])
+   board.valid_placement?(submarine, ["A1", "B1"])
 
-    assert_equal false, board.valid_placement?(submarine, ["A1", "B1"])
+   assert_equal false, board.valid_placement?(submarine, ['A1', 'B1'])
+    assert_equal false, board.valid_placement?(cruiser, ["A1", "B2", "C3"])
+    assert_equal false, board.valid_placement?(submarine, ["C2", "D3"])
   end
 
   # def test_can_place_ship
@@ -133,8 +133,8 @@ class BoardTest < Minitest::Test
     board.place(cruiser, ["A1", "A2", "A3"])
     board.place(submarine, ["B3, B4"])
 
-    expected2 = "  1 2 3 4 \n A S S S . \n B . . . . \n C . . . . \n D . . . . \n"
-
+    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+    
     assert_equal expected2, board.render(true)
   end
 
