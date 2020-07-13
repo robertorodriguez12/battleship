@@ -1,6 +1,10 @@
-#
+require './lib/ship'
+require './lib/cell'
+
+
+
 class Board
-  attr_reader :cells
+  attr_reader :cells, :board
 
   LETTERS = ['A', 'B', 'C', 'D']
   NUMBERS = ['1', '2', '3', '4']
@@ -101,6 +105,7 @@ class Board
   end
 
   def render(render_ship = false)
+
     row = ['A', 'B', 'C', 'D']
     row_index = 0
     @cells.values.each_slice(4).reduce("  1 2 3 4") do |acc, cells|
