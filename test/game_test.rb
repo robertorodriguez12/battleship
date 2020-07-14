@@ -1,21 +1,21 @@
-require 'pry'
 require 'minitest/autorun'
-require 'minitest/pride'
+require 'minitest/nyan_cat'
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
 require './lib/game'
-require './lib/runner'
+require 'pry'
 
-class GameTest < Minitest::Test
+class GameTest < MiniTest::Test
+  attr_reader :game
 
   def test_it_exists
-    game = Game.new("Human", "Computer")
+
+    game = Game.new
 
     assert_instance_of Game, game
+
   end
-  # 
-  # def test_user_can_place_ships
-  # end
+
 
 end

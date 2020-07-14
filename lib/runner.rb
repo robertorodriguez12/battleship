@@ -5,5 +5,5 @@ require './lib/board'
 require './lib/game'
 
 
-game = Game.new("Human Player", "AI")
+game = Game.new
 game.start
