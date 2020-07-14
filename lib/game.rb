@@ -3,6 +3,7 @@ require './lib/board'
 require './lib/cell'
 require './lib/ship'
 
+
 class Game
   attr_reader :human, :turn, :start, :ai, :place_human_cruiser, :place_human_submarine, :board
   # don't include :start? Already defining method below
@@ -19,6 +20,18 @@ class Game
     @human_cruiser = Ship.new("Cruiser", 3)
     @human_submarine = Ship.new("Submarine", 2)
 
+  end
+
+  def ai_turn
+    ai_fire_grid = [@board.cells.keys.sample]
+    until @board.cells.keys.cell.fired_upon? == false
+      ai_fire_grid.cell.fire_upon
+    end
+  end
+
+  def human_turn(answer)
+    print @computer_board.render
+    print @board.render(true)
   end
 
   def place_computer_ships
@@ -41,15 +54,13 @@ class Game
   def place_human_cruiser(user_input)
     user_input = user_input.split(" ")
     @human_cruiser_placement << user_input
-
-
   end
 
   def place_human_submarine(user_input)
     user_input = user_input.split(" ")
     @human_submarine_placement << user_input
-
   end
+
 
 
   def start
@@ -107,6 +118,19 @@ class Game
       end
       @board.place(@human_submarine, @human_submarine_placement)
       print @board.render(true)
+
+      binding.pry
+      until (@human_cruiser.sunk? == true && @human_submarine.sunk? == true) || (@ai_cruiser.sunk? == true && @ai_submarine.sunk? == true)
+        ai_turn
+        puts "The AI has taken their turn, choose the coordinate you would like to fire upon."
+        answer = gets.chomp
+
+        human_turn(answer)
+
+      end
+
+
+
     end
 
 
