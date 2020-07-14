@@ -42,8 +42,9 @@ class Game
 
   def ai_turn
     ai_fire_grid = @human_board.cells.keys.sample
-    @human_board.valid_coordinate?(ai_fire_grid) == true && @human_board.cells[ai_fire_grid].fired_upon? == false
-
+    until @human_board.valid_coordinate?(ai_fire_grid) == true && @human_board.cells[ai_fire_grid].fired_upon? == false
+      ai_fire_grid = @human_board.cells.keys.sample
+    end
     @human_board.cells[ai_fire_grid].fire_upon
     show_ai_shot_results(ai_fire_grid)
   end
@@ -179,7 +180,7 @@ class Game
 
       print @human_board.render(true)
 
-######### find way to make game loop
+
       until game_over? == true
         have_turns
       end
