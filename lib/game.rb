@@ -2,11 +2,11 @@ require 'pry'
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
+require './lib/board'
 
 
 class Game
   attr_reader :human, :turn, :start, :ai, :place_human_cruiser, :place_human_submarine, :board
-  # don't include :start? Already defining method below
 
   def initialize
     @human = 'Human Player'
@@ -39,7 +39,6 @@ class Game
     ai_submarine = Ship.new("Submarine", 2)
     submarine_placement = [@computer_board.cells.keys.sample, @computer_board.cells.keys.sample]
     cruiser_placement = [@computer_board.cells.keys.sample, @computer_board.cells.keys.sample, @computer_board.cells.keys.sample]
-    #use until valid placement
     until @computer_board.valid_placement?(ai_submarine, submarine_placement)
       submarine_placement = [@computer_board.cells.keys.sample, @computer_board.cells.keys.sample]
     end
@@ -83,6 +82,7 @@ class Game
       puts "AI has laid out their ships on the grid"
       puts "You now need to lay out your two ships."
       puts "The Cruiser is three units long and the Submarine is two units long."
+
       puts "Enter the squares for the Cruiser (3 Spaces):"
       print "> "
 
@@ -97,8 +97,7 @@ class Game
         user_input = gets.chomp
       end
       @board.place(@human_cruiser, @human_cruiser_placement)
-
-
+      
       print @board.render(true)
 
       puts "Enter the squares for the Submarine (2 Spaces)"
@@ -117,6 +116,7 @@ class Game
         place_human_submarine(user_input)
       end
       @board.place(@human_submarine, @human_submarine_placement)
+      
       print @board.render(true)
 
       binding.pry
@@ -132,16 +132,39 @@ class Game
 
 
     end
-
-
   end
 
   game = Game.new
   game.start
 
+#create until statement to run through turns until game is over.
+
+  #
+  #
+  #   puts "Place your Cruiser by entering coordinates, example 'A1, A2, A3'"
+  #   print '> '
+  #   cruiser_placement = gets.chomp
+  #
+  #
+  #   # computer generates random placement of two ships
+  #     # get hash keys as array, create 2 arrays - one with 2 elements, one with 3
+  #     # computer_cruiser/computer_submarine = .sample(2-3) method
+  #     # ^ chooses specified # of elements
+  #     # use .place to put on board
+  #   # display message to user & use .render to show board
+  #     # gets.chomp to place cruiser and submarine
+  #     # return invalid coordinate message if needed
+  #       # nested if statement?
+  #
+  #
+  # end
+  #
+  #
 
 
 
+
+# Do we need to create cell instances?
 # when firing a shot, display result to user
 # after user chooses to play, place both players' ships to set up
 # computer = random placement of ships (random element in keys array)
