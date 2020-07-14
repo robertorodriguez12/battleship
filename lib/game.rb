@@ -3,7 +3,7 @@ require './lib/board'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
-require './lib/turn'
+
 
 
 class Game
@@ -48,13 +48,13 @@ class Game
     show_ai_shot_results(ai_fire_grid)
   end
 
-  def show_ai_shot_results(shot_placement)
-    if @human_board.cells[shot_placement].empty? == true
-      puts "My shot on #{shot_placement} was a miss."
-    elsif @human_board.cells[shot_placement].ship.sunk? == true
-      puts "My shot on #{shot_placement} sunk your #{@human_board.cells[shot_placement].ship.name}."
-    else @human_board.cells[shot_placement].empty? == false
-      puts "My shot on #{shot_placement} was a hit."
+  def show_ai_shot_results(ai_fire_grid)
+    if @human_board.cells[ai_fire_grid].empty? == true
+      puts "My shot on #{ai_fire_grid} was a miss."
+    elsif @human_board.cells[ai_fire_grid].ship.sunk? == true
+      puts "My shot on #{ai_fire_grid} sunk your #{@human_board.cells[ai_fire_grid].ship.name}."
+    else @human_board.cells[ai_fire_grid].empty? == false
+      puts "My shot on #{ai_fire_grid} was a hit."
     end
   end
 
@@ -112,11 +112,8 @@ class Game
 
   def winner
     if game_over? == true
-      if @ai_cruiser.sunk? == true && @ai_submarine.sunk? == true
-        puts "You Won!!!"
-      else @human_cruiser.sunk? == true && @human_submarine.sunk? == true
-        puts "The Smarter Player Won....(hint: It wasn't you!!!!)"
-      end
+      return "The Smarter Player Won....(hint: It wasn't you!!!!)" if @human_cruiser.sunk? == true && @human_submarine.sunk? == true
+      return "You Won!!!" if @ai_cruiser.sunk? == true && @ai_submarine.sunk? == true
     end
   end
 
@@ -157,6 +154,8 @@ class Game
       end
       @human_board.place(@human_cruiser, @human_cruiser_placement)
 
+      puts "---------- Your Board -----------"
+
       print @human_board.render(true)
 
       puts "Enter the squares for the Submarine (2 Spaces)"
@@ -176,6 +175,8 @@ class Game
       end
       @human_board.place(@human_submarine, @human_submarine_placement)
 
+      puts "---------- Your Board -----------"
+
       print @human_board.render(true)
 
 ######### find way to make game loop
@@ -183,6 +184,8 @@ class Game
         have_turns
       end
       print winner
+
     end
+
   end
 end
