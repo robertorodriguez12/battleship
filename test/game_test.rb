@@ -19,11 +19,9 @@ class GameTest < MiniTest::Test
   #   game = Game.new
   # end
 
-  # def test_game_has_turns
+  # def test_ai_has_turns
   # end
 
-  # def test_board_can_render_different_conditions
-  # end
 
   # def test_board_can_report_conditions
   # end
