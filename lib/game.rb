@@ -88,6 +88,8 @@ class Game
       print @ai_board.render
       print @human_board.render(true)
       ai_turn
+      print @human_board.render(true)
+      break if game_over? == true
       human_turn
     end
   end
@@ -114,7 +116,7 @@ class Game
   end
 
   def start
-    place_computer_ships
+    place_ai_ships
     greeting = "Welcome to BATTLESHIP"
     puts greeting
     puts "Enter 'p' to play or 'q' to quit."
@@ -147,6 +149,7 @@ class Game
         print "> "
         @human_cruiser_placement = []
         user_input = gets.chomp
+        place_human_cruiser(user_input)
       end
       @human_board.place(@human_cruiser, @human_cruiser_placement)
 
@@ -176,7 +179,7 @@ class Game
       print @human_board.render(true)
 
 
-      until game_over? == true
+      while game_over? == false
         have_turns
       end
       print winner
