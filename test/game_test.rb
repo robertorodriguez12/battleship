@@ -15,13 +15,12 @@ class GameTest < MiniTest::Test
     assert_instance_of Game, game
   end
 
-  def test_ai_can_place_ships
-    game = Game.new
+  # def test_ai_can_place_ships
+  #   game = Game.new
+  # end
 
-    game.place_ai_ships
-    binding.pry
-    assert_equal
-  end
+  # def test_game_has_turns
+  # end
 
   # def test_board_can_render_different_conditions
   # end

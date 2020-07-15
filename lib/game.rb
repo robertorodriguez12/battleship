@@ -23,7 +23,6 @@ class Game
   end
 
   def place_ai_ships
-
     submarine_placement = [@ai_board.cells.keys.sample, @ai_board.cells.keys.sample]
     cruiser_placement = [@ai_board.cells.keys.sample, @ai_board.cells.keys.sample, @ai_board.cells.keys.sample]
     until @ai_board.valid_placement?(@ai_submarine, submarine_placement)
@@ -34,7 +33,6 @@ class Game
       cruiser_placement = [@ai_board.cells.keys.sample, @ai_board.cells.keys.sample, @ai_board.cells.keys.sample]
     end
     @ai_board.place(@ai_cruiser, cruiser_placement)
-    binding.pry
   end
 
   def ai_turn
