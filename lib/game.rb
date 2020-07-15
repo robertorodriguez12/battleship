@@ -47,15 +47,19 @@ class Game
   def show_ai_shot_results(ai_fire_grid)
     if @human_board.cells[ai_fire_grid].empty? == true
       puts "My shot on #{ai_fire_grid} was a miss."
+      puts "---------- AI Board -----------"
     elsif @human_board.cells[ai_fire_grid].ship.sunk? == true
       puts "My shot on #{ai_fire_grid} sunk your #{@human_board.cells[ai_fire_grid].ship.name}."
+      puts "---------- AI Board -----------"
     else @human_board.cells[ai_fire_grid].empty? == false
       puts "My shot on #{ai_fire_grid} was a hit."
+      puts "---------- AI Board -----------"
     end
   end
 
   def human_turn
     print @ai_board.render
+    puts "---------- Your Board -----------"
     print @human_board.render(true)
     puts "AI has fired on you! Enter the coordinate for your shot:"
     shot_coordinate = gets.chomp
@@ -76,10 +80,14 @@ class Game
   def show_human_shot_results(shot_coordinate)
     if @ai_board.cells[shot_coordinate].empty? == true
       puts "Your shot on #{shot_coordinate} was a miss."
+      # puts "---------- Your Board -----------"
     elsif @ai_board.cells[shot_coordinate].ship.sunk? == true
       puts "Your shot on #{shot_coordinate} sunk my #{@ai_board.cells[shot_coordinate].ship.name}."
+      # puts "---------- Your Board -----------"
     else @ai_board.cells[shot_coordinate].empty? == false
       puts "Your shot on #{shot_coordinate} was a hit."
+      # puts "---------- Your Board -----------"
+
     end
   end
 
@@ -138,7 +146,7 @@ class Game
       puts "You now need to lay out your two ships."
       puts "The Cruiser is three units long and the Submarine is two units long."
 
-      puts "Enter the squares for the Cruiser (3 Spaces):"
+      puts "Enter the cells for the Cruiser (3 Spaces): ex. A1 A2 A3, no commas"
       print "> "
 
       user_input = gets.chomp
@@ -146,7 +154,7 @@ class Game
       until @human_board.valid_placement?(@human_cruiser, @human_cruiser_placement.flatten!)
 
         puts "Those are invalid coordinates. Please try again:"
-        puts "Enter the cells for the Cruiser (3 Spaces): For example A1 A2 A3 (no commas)"
+        puts "Enter the cells for the Cruiser (3 Spaces): ex. A1 A2 A3, no commas"
         print "> "
         @human_cruiser_placement = []
         user_input = gets.chomp
@@ -154,11 +162,9 @@ class Game
       end
       @human_board.place(@human_cruiser, @human_cruiser_placement)
 
-      # puts "---------- Your Board -----------"
-
       print @human_board.render(true)
 
-      puts "Enter the squares for the Submarine (2 Spaces)"
+      puts "Enter the cells for the Submarine (2 Spaces) ex. D1 D2 or B2 C2, no commas"
       print "> "
 
       user_input = gets.chomp
@@ -167,7 +173,7 @@ class Game
 
       until @human_board.valid_placement?(@human_submarine, @human_submarine_placement.flatten!)
         puts "Those are invalid coordinates. Please try again:"
-        puts "Enter the cells for the Submarine (2 Spaces): For example A1 A2(no commas)"
+        puts "Enter the cells for the Submarine (2 Spaces): ex. A1 A2, no commas"
         print "> "
         @human_submarine_placement = []
         user_input = gets.chomp
