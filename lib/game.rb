@@ -1,10 +1,7 @@
 require 'pry'
-require './lib/board'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
-
-
 
 class Game
   attr_reader :human, :turn, :start, :ai, :place_human_cruiser, :place_human_submarine, :board
@@ -25,7 +22,7 @@ class Game
 
   end
 
-  def place_computer_ships
+  def place_ai_ships
 
     submarine_placement = [@ai_board.cells.keys.sample, @ai_board.cells.keys.sample]
     cruiser_placement = [@ai_board.cells.keys.sample, @ai_board.cells.keys.sample, @ai_board.cells.keys.sample]
@@ -37,7 +34,7 @@ class Game
       cruiser_placement = [@ai_board.cells.keys.sample, @ai_board.cells.keys.sample, @ai_board.cells.keys.sample]
     end
     @ai_board.place(@ai_cruiser, cruiser_placement)
-
+    binding.pry
   end
 
   def ai_turn
@@ -98,7 +95,7 @@ class Game
   end
 
   def game_over?
-    @ai_cruiser.sunk? == true && @ai_submarine.sunk? == true || @human_cruiser.sunk? == true && @human_submarine.sunk? == true
+    (@ai_cruiser.sunk? == true && @ai_submarine.sunk? == true) || (@human_cruiser.sunk? == true && @human_submarine.sunk? == true)
   end
 
   def place_human_cruiser(user_input)

@@ -46,7 +46,7 @@ class CellTest < MiniTest::Test
     cell.fire_upon
 
     assert_equal true, cell.fired_upon?
-    
+
     #
     assert_equal 2, cell.ship.health
 
@@ -94,7 +94,9 @@ class CellTest < MiniTest::Test
 
   def test_it_can_render_sunk
     cell_2 = Cell.new("C3")
+    cell_3 = Cell.new("A1")
     cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
 
     cell_2.place_ship(cruiser)
 
@@ -108,6 +110,18 @@ class CellTest < MiniTest::Test
     assert_equal true, cruiser.sunk?
 
     assert_equal "X", cell_2.render
+
+    cell_3.place_ship(submarine)
+
+    cell_3.fire_upon
+
+    assert_equal false, submarine.sunk?
+
+    submarine.hit
+
+    assert_equal true, submarine.sunk?
+
+    assert_equal "X", cell_3.render
   end
 
 

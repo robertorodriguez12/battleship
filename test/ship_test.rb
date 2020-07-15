@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require 'minitest/nyan_cat'
+require 'minitest/pride'
 require './lib/ship'
 require 'pry'
 
@@ -49,5 +49,5 @@ class ShipTest < MiniTest::Test
     assert_equal 2, cruiser.health
 
     # ship1.hit
-  end 
+  end
 end

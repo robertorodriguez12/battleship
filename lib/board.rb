@@ -1,5 +1,6 @@
 require './lib/ship'
 require './lib/cell'
+require './lib/game'
 require 'pry'
 
 class Board
@@ -21,90 +22,12 @@ class Board
     end
   end
 
-  def valid_coordinate?(coordinate)
-    @cells.has_key?(coordinate)
-  end
-
-  def valid_placement?(ship, coordinate_array)
-    return false if ship.length != coordinate_array.length
-    (valid_horizontal_placement?(coordinate_array) || valid_vertical_placement?(coordinate_array)) &&
-    no_overlap?(coordinate_array)
-
-  end
-
-  def valid_letters?(coordinates)
-    letters = coordinates.map do |coordinate|
-    coordinate.split("").first.ord
-    end
-    letters.each_cons(2).all? do |first, second|
-      first + 1 == second
-    end
-
-  end
-
-  def valid_numbers?(coordinates)
-    numbers = coordinates.map do |coordinate|
-    coordinate.split("")[1].ord
-    end
-    numbers.each_cons(2).all? do |first, second|
-      first + 1 == second
-    end
-  end
-
-  def valid_horizontal_placement?(coordinates)
-    letters = coordinates.map do |coordinate|
-    coordinate.split("")[0].ord
-    end
-    numbers = coordinates.map do |coordinate|
-    coordinate.split("")[1].ord
-    end
-    valid_letters = letters.each_cons(2).all? do |first, second|
-      first == second
-    end
-    valid_numbers = numbers.each_cons(2).all? do |first, second|
-      first + 1 == second
-    end
-    valid_letters && valid_numbers
-  end
-
-  def place(ship, coordinates)
-    if valid_placement?(ship, coordinates)
-      coordinates.each do |coordinate|
-        @cells[coordinate].place_ship(ship)
-      end
-    end
-
-  end
-
-  def valid_vertical_placement?(coordinates)
-    letters = coordinates.map do |coordinate|
-    coordinate.split("")[0].ord
-    end
-    numbers = coordinates.map do |coordinate|
-    coordinate.split("")[1].ord
-    end
-    valid_letters = letters.each_cons(2).all? do |first, second|
-      first + 1 == second
-    end
-    valid_numbers = numbers.each_cons(2).all? do |first, second|
-      first == second
-    end
-    valid_letters && valid_numbers
-
-  end
-
-  def no_overlap?(coordinate_array)
-    coordinate_array.all? do |coordinate|
-      @cells[coordinate].empty?
-    end
-  end
-
   def valid_coordinate?(key)
     @cells.has_key?(key)
   end
 
   def valid_placement?(ship, coordinate_array)
-    return false if ship.length != coordinate_array.length
+    return false if ship.health != coordinate_array.length
     (valid_horizontal_placement?(coordinate_array) || valid_vertical_placement?(coordinate_array)) &&
     no_overlap?(coordinate_array)
   end
@@ -173,7 +96,7 @@ class Board
     end
       end
   end
-  
+
   def render(render_ship = false)
 
     row = ['A', 'B', 'C', 'D']
