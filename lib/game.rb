@@ -85,10 +85,11 @@ class Game
 
   def have_turns
     until game_over? == true
+      puts "---------- AI Board -----------"
       print @ai_board.render
+      puts "---------- Your Board -----------"
       print @human_board.render(true)
       ai_turn
-      print @human_board.render(true)
       break if game_over? == true
       human_turn
     end
@@ -153,7 +154,7 @@ class Game
       end
       @human_board.place(@human_cruiser, @human_cruiser_placement)
 
-      puts "---------- Your Board -----------"
+      # puts "---------- Your Board -----------"
 
       print @human_board.render(true)
 
@@ -173,12 +174,6 @@ class Game
         place_human_submarine(user_input)
       end
       @human_board.place(@human_submarine, @human_submarine_placement)
-
-      puts "---------- Your Board -----------"
-
-      print @human_board.render(true)
-
-
       while game_over? == false
         have_turns
       end
