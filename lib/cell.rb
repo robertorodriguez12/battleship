@@ -31,13 +31,11 @@ class Cell
   end
 
   def render(default = false)
-
     return "M" if fired_upon? && empty?
     return "." if default == false && fired_upon? == false
     return "." if default == true && fired_upon? == false && empty?
     return "S" if fired_upon? == false && default == true && empty? == false && ship.sunk? == false
     return "H" if fired_upon? == true && @ship.sunk? == false && empty? == false
-    return "." if default == true && fired_upon? == false && empty?
     return "H" if fired_upon? && @ship.sunk? == false && empty? == false
     return "X" if empty? == false && @ship.sunk?
   end
