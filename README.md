@@ -13,6 +13,7 @@
 - how to create objects inside classes
 - how to fine tune the functionality of the game
 - fixing bugs and then making more bugs!
+- writing the tests for Game!!!
 
 ## What we learned:
 - got more practice building on the concepts in the solo project
